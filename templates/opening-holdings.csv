@@ -1,0 +1,2 @@
+identifier,name,instrument_type,account,date,type,units,price,amount,fees,currency,source_reference,plan,option,category,valuation_date,closing_units,settlement_date,asset_class
+SYNTHETIC-STOCK-NSE,Sample Technology Company,STOCK,Broker **2041,2026-01-01,OPENING,10,130,,0,INR,opening-001,,,Technology,2026-01-01,10,,Equity

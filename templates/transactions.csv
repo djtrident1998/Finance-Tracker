@@ -1,0 +1,3 @@
+identifier,name,instrument_type,account,date,type,units,price,amount,fees,currency,source_reference,plan,option,category,valuation_date,closing_units,settlement_date,asset_class
+SYNTHETIC-INDEX,Sample Index Fund,MF,Folio **1234,2025-01-05,BUY,10,100,1000,0,INR,example-001,Direct,Growth,Index,2025-01-05,10,2025-01-06,Equity
+SYNTHETIC-INDEX,Sample Index Fund,MF,Folio **1234,2025-02-05,BUY,5,120,600,0,INR,example-002,Direct,Growth,Index,2025-02-05,15,2025-02-06,Equity
