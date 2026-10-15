@@ -1,4 +1,5 @@
 dist/
+public/
 site.tar.gz
 node_modules/
 .local/
@@ -6,3 +7,6 @@ node_modules/
 !.env.example
 *.tar.gz
 *.zip
+
+.vercel
+.env*

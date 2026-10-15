@@ -4,7 +4,7 @@ A working personal tracker and deterministic planning foundation, built from the
 
 ## Run locally
 
-Requires Node.js 24 or newer with `node:sqlite`. There are no npm dependencies.
+Requires Node.js 24 with `node:sqlite`. Install the pinned dependencies with `pnpm install` before running all tests; the Vercel adapter uses the official Neon database and authentication SDKs.
 
 ```powershell
 node scripts/build.mjs
@@ -36,6 +36,16 @@ Phase 2 has deterministic primitives and honest insufficient-data screens. Actua
 Phase 3 has a report worker and provider setup states. Representative statement parsers, a verified account integration, licensed stock/corporate-action adapters, email delivery, alert cooldowns and an optional AI integration remain. Credentials alone do not implement these integrations. Each needs documented formats, permissions, data coverage and further engineering.
 
 ## Hosted deployment
+
+### Vercel
+
+`vercel.json` builds the web assets with `scripts/build-vercel.mjs` and runs `api/handler.js` in Singapore on Node.js 24. Provision a Neon Marketplace database with Neon Auth, connect it to the intended Vercel project, and set `NEON_AUTH_COOKIE_SECRET` to a cryptographically random secret of at least 32 characters. Required environment keys are `DATABASE_URL`, `NEON_AUTH_BASE_URL`, and `NEON_AUTH_COOKIE_SECRET`; keep their values in Vercel's secret storage.
+
+The build verifies the configuration and applies the idempotent Postgres ledger schema in a transaction before release. The Postgres adapter preserves bound parameters and atomic ledger batches. Sign-in and registration use managed Neon Auth through its official server toolkit. Data APIs validate the session and replace caller-supplied Sites identity headers with the verified account identity. Records remain scoped to that owner. Register deployment domains with Neon Auth's trusted-origin configuration if the managed integration does not add them automatically.
+
+Run `node --test tests/*.test.mjs`, deploy a staged production build with `vercel deploy --prod --skip-domain`, verify it, then promote that deployment. The local SQLite server remains a development preview. Scheduled reports, market-data feeds, and application email delivery are not enabled by this Vercel adapter; manual report generation remains available. Configure Neon backup retention and test restoration separately.
+
+### Sites
 
 The tracked `.openai/hosting.json` preserves the private Sites project identity and declares the D1 binding `DB`. Use the Sites source synchronization/package/deploy workflow; migrations are included in the artifact and applied before the Worker is published. Do not recreate the Site or alter its audience for deployment. Never put runtime secrets in the manifest or browser bundle.
 

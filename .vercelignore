@@ -1,0 +1,10 @@
+.git
+.local
+.env*
+!.env.example
+node_modules
+dist
+worker
+public
+*.zip
+*.bundle
